@@ -4,6 +4,7 @@
 
 import base64
 import requests
+import os
 import json
 
 def wisk_auth():
