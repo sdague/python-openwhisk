@@ -7,13 +7,13 @@ import requests
 import os
 import json
 
-def wisk_auth():
+def whisk_auth():
     key = os.environ["__OW_API_KEY"]
     auth = "Basic %s" % base64.b64encode(key.encode('ascii')).decode('ascii')
     return auth
 
 
-def wisk_invoke(action, **kwargs):
+def whisk_invoke(action, **kwargs):
     r = requests.post(
         "https://openwhisk.ng.bluemix.net/api/v1/namespaces/_/actions/%s" %
         (action),
@@ -22,7 +22,7 @@ def wisk_invoke(action, **kwargs):
     return r.content
 
 
-def wisk_get(pkg):
+def whisk_get(pkg):
     ns = os.environ["__OW_NAMESPACE"]
     r = requests.get(
         "https://openwhisk.ng.bluemix.net/api/v1/namespaces/%s/packages/%s" %
@@ -32,7 +32,7 @@ def wisk_get(pkg):
 
 
 def params_from_pkg(pkg):
-    content = wisk_get(pkg)
+    content = whisk_get(pkg)
     j = json.loads(content)
     params = {}
     for p in j['parameters']:
